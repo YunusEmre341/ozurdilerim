@@ -59,6 +59,38 @@ function handleNoClick() {
 function handleYesClick() {
     window.location.href = "yes_page.html";
 }
+
+
+function handleNoClick() {
+  const noButton = document.querySelector('.no-button');
+  const yesButton = document.querySelector('.yes-button');
+  
+  // 1️⃣ Yazıyı değiştir
+  noButton.textContent = messages[messageIndex];
+  messageIndex = (messageIndex + 1) % messages.length;
+
+  // 2️⃣ Butonu ekranda rastgele konumlandır (kaçma efekti)
+  const container = document.querySelector('.container');
+  const containerRect = container.getBoundingClientRect();
+  const buttonWidth = noButton.offsetWidth;
+  const buttonHeight = noButton.offsetHeight;
+  
+  // Rastgele konum hesapla (container içinde kalacak şekilde)
+  const maxX = containerRect.width - buttonWidth;
+  const maxY = containerRect.height - buttonHeight;
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+
+  // container içindeki pozisyonu ayarla
+  noButton.style.position = 'absolute';
+  noButton.style.left = `${randomX}px`;
+  noButton.style.top = `${randomY}px`;
+
+  // 3️⃣ Evet butonunu büyüt
+  const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+  yesButton.style.fontSize = `${currentSize * 1.5}px`;
+}
+
     </script>
     <link rel="stylesheet" href="style.css">
 </head>
